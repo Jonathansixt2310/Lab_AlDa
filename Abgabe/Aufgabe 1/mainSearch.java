@@ -39,14 +39,12 @@ public class mainSearch {
         Laufzeit) klassifiziert wird:
             Im Worst Case ist das gesuchte Element nicht vorhanden und die for-Schleife muss N mal durchlaufen werden.
             Die Laufzeit steit also proportional/linear zur Array-Länge.
-            Laufzeit also direkt von n abhängig
+            Laufzeit also direkt von N abhängig
 
          Vergleichen Sie dieses empirische Ergebnis mit der formalen Big-O-Definition,
          die besagt, dass f(n)≤c⋅g(n) gilt, wobei g(n)=n.
             Hier g(n) = n --> lineares Wachstum
             Bedeutet: Die Laufzeit wächst höchstens linear mit der Eingabegröße
         */
-
-
     }
 }
