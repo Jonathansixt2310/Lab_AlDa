@@ -46,7 +46,7 @@ public class HomageStarter extends Canvas {
             float b = random.nextFloat();
             g.setColor(new Color(r, gr, b));
 
-            //Aktuelles Quadrat zeichen
+            //Aktuelles Quadrat zeichnen und befüllen
             g.fillRect(x,y, size, size);
 
             //Rekursiverfalls
@@ -59,7 +59,6 @@ public class HomageStarter extends Canvas {
             int nextY = y + size / 6;
 
             drawSquares(g, nextX, nextY, nextSize, count -1);
-
     }
 
     /**

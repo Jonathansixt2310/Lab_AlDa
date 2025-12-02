@@ -131,7 +131,7 @@ public class TinyBrowser extends JFrame {
             //Aufgabe - Aktuellen Link in forward Stack aufnehmen
             forward.push(urlField.getText());
             goToPage(newUrl, false);
-            history.pop(); // Undo the push performed by goToPage
+            history.pop(); // Löschen des hinzugefügten Links vom stapel - sonst wäre es vorwärts
         }
     }
 
