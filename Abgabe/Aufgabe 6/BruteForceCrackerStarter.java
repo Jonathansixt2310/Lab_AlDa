@@ -65,6 +65,7 @@ public class BruteForceCrackerStarter {
     public void crack(byte[] target, int k) {
         generate(target, k, "");
     }
+
     public static void main(String[] args){
         //Anpassung 2 - Passwort festlegen
         Scanner scanner = new Scanner(System.in);

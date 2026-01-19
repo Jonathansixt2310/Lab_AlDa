@@ -75,7 +75,7 @@ public class WhoOwnsTheFish {
         return rulesOk;
     }
 
-    //Regeln prüfen
+    //Hilfsmethode - Regeln prüfen
     private boolean checkRules(int[][] houses) {
         // Wir iterieren durch alle Häuser, um direkte Zuordnungen zu prüfen
         for (int i = 0; i < 5; i++) {
@@ -89,27 +89,27 @@ public class WhoOwnsTheFish {
             if (n == BRIT && c != NONE && c != RED) return false;
             if (c == RED && n != NONE && n != BRIT) return false;
 
-            // 2. Der Schwede hält Hunde. [cite: 25]
+            // 2. Der Schwede hält Hunde.
             if (n == SWEDE && p != NONE && p != DOG) return false;
             if (p == DOG && n != NONE && n != SWEDE) return false;
 
-            // 3. Der Däne trinkt Tee. [cite: 26]
+            // 3. Der Däne trinkt Tee.
             if (n == DANE && d != NONE && d != TEA) return false;
             if (d == TEA && n != NONE && n != DANE) return false;
 
-            // 5. Der Besitzer des grünen Hauses trinkt Kaffee. [cite: 28]
+            // 5. Der Besitzer des grünen Hauses trinkt Kaffee.
             if (c == GREEN && d != NONE && d != COFFEE) return false;
             if (d == COFFEE && c != NONE && c != GREEN) return false;
 
-            // 6. Die Person, die Pall Mall raucht, hält Vögel. [cite: 29]
+            // 6. Die Person, die Pall Mall raucht, hält Vögel.
             if (s == PALLMALL && p != NONE && p != BIRDS) return false;
             if (p == BIRDS && s != NONE && s != PALLMALL) return false;
 
-            // 7. Der Besitzer des gelben Hauses raucht Dunhill. [cite: 30]
+            // 7. Der Besitzer des gelben Hauses raucht Dunhill.
             if (c == YELLOW && s != NONE && s != DUNHILL) return false;
             if (s == DUNHILL && c != NONE && c != YELLOW) return false;
 
-            // 10. Der Mann, der Blue Master raucht, trinkt Bier. [cite: 33]
+            // 10. Der Mann, der Blue Master raucht, trinkt Bier.
             if (s == BLUEMASTER && d != NONE && d != BEER) return false;
             if (d == BEER && s != NONE && s != BLUEMASTER) return false;
 
@@ -125,16 +125,16 @@ public class WhoOwnsTheFish {
             if (greenIndex != whiteIndex - 1) return false;
         }
 
-        // 8. Der Mann, der Blends raucht, lebt neben dem, der Katzen hält. [cite: 31]
+        // 8. Der Mann, der Blends raucht, lebt neben dem, der Katzen hält.
         if (!checkNeighborRule(houses, SMOKES, BLENDS, PET, CATS)) return false;
 
-        // 9. Der Mann, der Pferde hält, lebt neben dem, der Dunhill raucht. [cite: 32]
+        // 9. Der Mann, der Pferde hält, lebt neben dem, der Dunhill raucht.
         if (!checkNeighborRule(houses, PET, HORSE, SMOKES, DUNHILL)) return false;
 
         // 12. Der Norweger lebt neben dem blauen Haus. [cite: 35]
         if (!checkNeighborRule(houses, NATIONALITY, NORWEGIAN, COLOR, BLUE)) return false;
 
-        // 13. Der Mann, der Blends raucht, hat einen Nachbarn, der Wasser trinkt. [cite: 36]
+        // 13. Der Mann, der Blends raucht, hat einen Nachbarn, der Wasser trinkt.
         if (!checkNeighborRule(houses, SMOKES, BLENDS, DRINKS, WATER)) return false;
 
         return true;

@@ -88,7 +88,7 @@ public class PixieStarter {
     public List<String> recommend(String start, int maxSteps, int k) {
         HashMap<String, Integer> counts = new HashMap<>();
 
-        // NEU: Implementierung des Random Walks [cite: 6]
+        // NEU: Implementierung des Random Walks
         Random random = new Random();
         String currentItem = start;
 
@@ -133,7 +133,7 @@ public class PixieStarter {
             counts.put(currentItem, counts.getOrDefault(currentItem, 0) + 1);
         }
 
-        return getTopK(counts, k); // [cite: 11]
+        return getTopK(counts, k);
     }
 
     private List<String> getTopK(HashMap<String, Integer> counts, int k) {
