@@ -12,6 +12,11 @@ public class EigeneArrayListe <T> {
         this.size = 0;
     }
 
+    // Gibt die Anzahl der Elemente zurück
+    public int size() {
+        return this.size;
+    }
+
     public T get(int index) {
 
         // 1. Sicherheitscheck: Ist der Index überhaupt gültig?
@@ -88,7 +93,7 @@ public class EigeneArrayListe <T> {
         // Wir starten bei dem Index, der gelöscht werden soll.
         // Wir überschreiben ihn mit seinem rechten Nachbarn.
         // Das wiederholen wir bis zum vorletzten Element.
-        for (int i = index + 1; 1 < this.size; i++) {
+        for (int i = index + 1; i < this.size; i++) {
             this.array[i-1] = this.array[i];
         }
 
@@ -102,5 +107,69 @@ public class EigeneArrayListe <T> {
         size--;
 
         return removedItem;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== START TEST: ArrayList ===");
+
+        // 1. Erstellen der Liste (Generics Test mit String)
+        EigeneArrayListe<String> liste = new EigeneArrayListe<>();
+        printStatus(liste, "Liste initialisiert");
+
+        // 2. Test: Einfaches Hinzufügen (add)
+        liste.add("A");
+        liste.add("B");
+        liste.add("C");
+        printStatus(liste, "Nach add(A, B, C)");
+
+        // 3. Test: Einfügen zwischendrin (insert)
+        // Wir fügen "X" zwischen A und B ein (Index 1)
+        System.out.println("--> Füge 'X' an Index 1 ein...");
+        liste.insert(1, "X");
+        printStatus(liste, "Nach insert(1, 'X')");
+        // Erwartung: [A, X, B, C]
+
+        // 4. Test: Löschen (remove)
+        // Wir löschen das "B". Es sollte an Index 2 liegen.
+        System.out.println("--> Lösche Element an Index 2...");
+        String geloescht = liste.remove(2);
+        System.out.println("Gelöschtes Element war: " + geloescht);
+        printStatus(liste, "Nach remove(2)");
+        // Erwartung: [A, X, C] ("B" ist weg, "C" ist nachgerückt)
+
+        // 5. Test: Automatische Vergrößerung (Resizing)
+        System.out.println("--> Fülle Liste auf, um Resize zu erzwingen...");
+        // Wir fügen viele Elemente hinzu, um über die Kapazität von 10 zu kommen
+        for (int i = 0; i < 10; i++) {
+            liste.add("Nummer " + i);
+        }
+        printStatus(liste, "Nach Massen-Add (Resize Test)");
+        // Die Größe müsste jetzt 3 (von vorher) + 10 = 13 sein.
+
+        // 6. Test: Fehlerbehandlung (Exception)
+        System.out.println("--> Teste ungültigen Zugriff...");
+        try {
+            liste.get(100); // Index 100 gibt es nicht
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Erfolg! Fehler wurde korrekt abgefangen: " + e.getMessage());
+        }
+
+        System.out.println("=== TEST ENDE ===");
+    }
+
+    // --- Hilfsmethode zum schönen Ausgeben ---
+    // Diese Methode zeigt uns den Inhalt der Liste wie [A, B, C] an
+    public static void printStatus(EigeneArrayListe<?> list, String message) {
+        System.out.println(message);
+        System.out.print("Inhalt: [");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i)); // Nutzt unser get()
+            if (i < list.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Size: " + list.size());
+        System.out.println("-------------------------");
     }
 }
