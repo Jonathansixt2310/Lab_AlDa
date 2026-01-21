@@ -30,6 +30,40 @@ public class EigeneLinkedList<T> {
         size++;
     }
 
+    public void insert(int index, T value) {
+        // 1. Sicherheitscheck
+        checkIndex(index);
+
+        // 2. Neuen Knoten erstellen
+        ListNode<T> newNode = new ListNode<>(value);
+
+        // 3. Fallunterscheidung
+        // FALL A: Einfügen ganz am Anfang (Index 0)
+        // Hier gibt es kein "davor", wir müssen den Head selbst ändern.
+        if (index == 0) {
+            newNode.next = head; // Der Neue zeigt auf den alten Ersten
+            head = newNode;      // Der Neue wird der Chef
+        }
+
+        // FALL B: Einfügen in der Mitte oder am Ende
+        else {
+            ListNode<T> current = head;
+
+            // Wir laufen bis EINS VOR die gewünschte Stelle (index - 1)
+            for (int i = 0; i < index - 1; i++) {
+                current = current.next;
+            }
+
+            // Das Umbiegen der Zeiger
+            // WICHTIG: Erst den Neuen verbinden, DANN den Alten lösen!
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+
+        // 4. Größe anpassen (Dein Code Zeile 15)
+        size++;
+    }
+
     // 2. Element holen (Get)
     public T get(int index) {
         checkIndex(index);
