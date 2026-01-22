@@ -17,6 +17,7 @@ public class EigeneArrayListe <T> {
         return this.size;
     }
 
+    //Holen
     public T get(int index) {
 
         // 1. Sicherheitscheck: Ist der Index überhaupt gültig?
@@ -30,6 +31,7 @@ public class EigeneArrayListe <T> {
         return array[index];
     }
 
+    //Hinzufügen am Ende
     public void add(T item) {
         // 1. Prüfen, ob das Array voll ist
         if (size == array.length) {
@@ -52,6 +54,7 @@ public class EigeneArrayListe <T> {
         size++;
     }
 
+    //Hinzufügen an beliebiger Stelle
     public void insert(int index, T item) {
         // 1. Sicherheitscheck:
         // WICHTIG: Hier ist "index == size" ERLAUBT!
@@ -81,6 +84,24 @@ public class EigeneArrayListe <T> {
         size++;
     }
 
+    //Überschreiben
+    public T set(int index, T value) {
+        // 1. Sicherheitscheck: Gibt es den Index überhaupt?
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+
+        // 2. Den alten Wert merken (Standard in Java: man gibt zurück, was gelöscht/überschrieben wurde)
+        T oldValue = (T) this.array[index];
+
+        // 3. Den neuen Wert an die berechnete Adresse schreiben
+        this.array[index] = value;
+
+        // 4. Den alten Wert zurückgeben
+        return oldValue;
+    }
+
+    //Entfernen
     public T remove(int index) {
         // 1. Sicherheitscheck: Ist der Index gültig?
         if (index < 0 || index >= size) {

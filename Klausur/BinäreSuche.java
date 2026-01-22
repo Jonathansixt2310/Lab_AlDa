@@ -10,7 +10,7 @@ public class BinäreSuche {
         while (links <= rechts) {
 
             // 1. Die Mitte berechnen
-            int mitte = links + (rechts - links) / 2;
+            int mitte = (links + rechts) / 2;
 
             // 2. Prüfen: Haben wir es gefunden?
             if (daten[mitte] == gesuchterWert) {

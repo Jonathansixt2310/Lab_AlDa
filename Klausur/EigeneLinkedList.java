@@ -30,6 +30,7 @@ public class EigeneLinkedList<T> {
         size++;
     }
 
+    //Einfügen an Index
     public void insert(int index, T value) {
         // 1. Sicherheitscheck
         checkIndex(index);
@@ -64,7 +65,30 @@ public class EigeneLinkedList<T> {
         size++;
     }
 
-    // 2. Element holen (Get)
+    // Ersetzen
+    public T set(int index, T value) {
+        // 1. Sicherheitscheck
+        checkIndex(index);
+
+        // 2. Den richtigen Knoten suchen (Wir müssen hinlaufen!)
+        ListNode<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        // Jetzt zeigt 'current' auf den Knoten, den wir ändern wollen.
+
+        // 3. Den alten Wert merken
+        T oldValue = current.value;
+
+        // 4. Den neuen Wert in den Knoten schreiben
+        current.value = value;
+
+        // 5. Den alten Wert zurückgeben
+        return oldValue;
+    }
+
+    //Element holen (Get)
     public T get(int index) {
         checkIndex(index);
 
@@ -77,13 +101,14 @@ public class EigeneLinkedList<T> {
         return current.value;
     }
 
-    // 3. Entfernen (Remove)
+    //Entfernen (Remove)
     public T remove(int index) {
         checkIndex(index);
 
         ListNode<T> removedNode;
 
         //Kopf löschen
+        //löschender Knoten ist der Kopf
         if (index == 0) {
             removedNode = head;
             head = head.next;
@@ -101,7 +126,7 @@ public class EigeneLinkedList<T> {
         return removedNode.value;
     }
 
-    // 4. Size Getter
+    //Size Getter
     public int size() {
         return this.size;
     }
