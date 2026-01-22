@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
-public class Stack<T> {
+public class ArrayStack<T> {
     // Interne Liste zum Speichern der Elemente
     private ArrayList<T> items;
 
     // Konstruktor: Initialisiert die Liste
-    public Stack() {
+    public ArrayStack() {
         this.items = new ArrayList<T>();
     }
 
