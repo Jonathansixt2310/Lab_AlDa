@@ -16,9 +16,7 @@ public class BinäreSucheRekursiv {
         }
 
         // MITTE BERECHNEN
-        // (links + rechts) / 2 würde auch gehen, aber diese Formel verhindert
-        // einen Integer-Overflow bei sehr großen Arrays.
-        int mitte = links + (rechts - links) / 2;
+        int mitte = (links + rechts) / 2;
 
         // ABBRUCHBEDINGUNG 2: Gefunden!
         if (array[mitte] == gesucht) {
