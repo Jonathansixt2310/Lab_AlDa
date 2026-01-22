@@ -86,7 +86,7 @@ public class RekursiverBaum extends JPanel {
         this.heading = -90;
 
         // Aufruf mit Beispielwerten
-        tree(g2d, 10, 100, 30, 0.8);
+        tree(g2d, 3, 100, 30, 0.8);
     }
 
     public static void main(String[] args) {
