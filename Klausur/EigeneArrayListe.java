@@ -31,6 +31,37 @@ public class EigeneArrayListe <T> {
         return array[index];
     }
 
+    //Hinzufügen am Anfang
+    public void addFirst(T item) {
+        // 1. Prüfen, ob das Array voll ist (und ggf. vergrößern)
+        if (size == array.length) {
+            // Wenn voll: Neues Array mit doppelter Größe erstellen
+            T[] newArray = (T[]) new Object[array.length * 2];
+
+            // Alte Daten kopieren
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
+            }
+
+            // Referenz auf das neue Array setzen
+            array = newArray;
+        }
+
+        // 2. PLATZ MACHEN (Der teure Teil!)
+        // Wir fangen hinten an und schieben alles eins nach rechts.
+        // Von Index 'size' runter bis Index 1.
+        for (int i = size; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+
+        // 3. Jetzt ist Index 0 frei (oder technisch gesehen: dupliziert),
+        // wir können ihn überschreiben.
+        array[0] = item;
+
+        // 4. Größe anpassen
+        size++;
+    }
+
     //Hinzufügen am Ende
     public void add(T item) {
         // 1. Prüfen, ob das Array voll ist

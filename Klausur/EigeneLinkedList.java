@@ -13,7 +13,22 @@ public class EigeneLinkedList<T> {
 
     // --- METHODEN (Angepasst an ListNode und value) ---
 
-    // 1. Hinzufügen (Add)
+    //Hinzufügen vorne
+    public void addFirst(T item) {
+        // 1. Neuen Knoten erstellen
+        ListNode<T> newNode = new ListNode<>(item);
+
+        // 2. Den neuen Knoten mit dem aktuellen Anfang verknüpfen
+        newNode.next = head;
+
+        // 3. Den Start-Zeiger auf den neuen Knoten setzen
+        head = newNode;
+
+        // 4. Größe anpassen
+        size++;
+    }
+
+    // Hinzufügen am Ende
     public void add(T item) {
 
         ListNode<T> newNode = new ListNode<>(item);
