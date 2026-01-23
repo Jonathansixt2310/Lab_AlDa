@@ -76,4 +76,41 @@ public class BinarySearchTree<K extends Comparable<K>> {
             parent.right = newNode;
         }
     }
+
+    /**
+     * Löschen eines Schlüssels (Logik nach Folie 27-33)
+     */
+    public void delete(K key) {
+        root = deleteRecursive(root, key);
+    }
+
+    private TreeNode<K> deleteRecursive(TreeNode<K> current, K key) {
+        if (current == null) return null;
+
+        int comparison = key.compareTo(current.key);
+        if (comparison < 0) {
+            current.left = deleteRecursive(current.left, key);
+        } else if (comparison > 0) {
+            current.right = deleteRecursive(current.right, key);
+        } else {
+            // Fall 1 & 2: Ein Kind oder kein Kind (Folie 27, 28)
+            if (current.left == null) return current.right;
+            if (current.right == null) return current.left;
+
+            // Fall 3: Zwei Kinder (Folie 30-33)
+            // Ersetze durch Nachfolger (kleinster Wert im rechten Teilbaum)
+            current.key = findMin(current.right);
+            current.right = deleteRecursive(current.right, current.key);
+        }
+        return current;
+    }
+
+    private K findMin(TreeNode<K> node) {
+        K min = node.key;
+        while (node.left != null) {
+            min = node.left.key;
+            node = node.left;
+        }
+        return min;
+    }
 }
