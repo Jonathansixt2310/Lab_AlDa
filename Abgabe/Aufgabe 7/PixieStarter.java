@@ -61,20 +61,10 @@ public class PixieStarter {
                 int neighborColor = 1 - currentColor; // Das Gegenteil von 0 ist 1, und umgekehrt
 
                 // Nachbarn prüfen
-                if (graph.get(current) != null) {
-                    for (String neighbor : graph.get(current)) {
-                        if (!colors.containsKey(neighbor)) {
-                            // Noch nicht gefärbt: Färben und in die Queue
-                            colors.put(neighbor, neighborColor);
-                            queue.add(neighbor);
-                        } else if (colors.get(neighbor) == currentColor) {
-                            // Konflikt: Nachbar hat dieselbe Farbe -> Nicht bipartit
-                            return false;
-                        }
-                    }
-                }
+
             }
         }
+
         return true; // Keine Konflikte gefunden
     }
 
@@ -88,7 +78,7 @@ public class PixieStarter {
     public List<String> recommend(String start, int maxSteps, int k) {
         HashMap<String, Integer> counts = new HashMap<>();
 
-        // NEU: Implementierung des Random Walks
+        // NEU: Implementierung des Random Walks [cite: 6]
         Random random = new Random();
         String currentItem = start;
 
