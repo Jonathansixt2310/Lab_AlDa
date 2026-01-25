@@ -46,12 +46,6 @@ public class BinarySearchTree<K extends Comparable<K>> {
      */
     public void insert(K key) {
         TreeNode<K> newNode = new TreeNode<>(key);
-
-        if (this.root == null) {
-            this.root = newNode; // Baum war leer
-            return;
-        }
-
         TreeNode<K> current = this.root;
         TreeNode<K> parent = null;
 
@@ -70,7 +64,10 @@ public class BinarySearchTree<K extends Comparable<K>> {
         }
 
         // Den neuen Knoten an den 'parent' anhängen
-        if (key.compareTo(parent.key) < 0) {
+        if(this.root == null) {
+            this.root = newNode; //leerer Baum
+        }
+        else if (key.compareTo(parent.key) < 0) {
             parent.left = newNode;
         } else {
             parent.right = newNode;

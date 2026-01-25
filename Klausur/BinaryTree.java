@@ -85,4 +85,25 @@ public class BinaryTree<T> {
             }
         }
     }
+
+    public void mirror(TreeNode<T> root) {
+        // 1. Basisfall: Wenn der Knoten leer ist, stoppe die Rekursion
+        if (root == null) {
+            return;
+        }
+
+        // 2. Vertausche die Kinder des aktuellen Knotens (Swap)
+        TreeNode<T> temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        // 3. Rekursiver Aufruf für die nun vertauschten Teilbäume
+        mirror(root.left);
+        mirror(root.right);
+    }
+
+    // Hilfsmethode zum Starten des Spiegelns von außen
+    public void mirror() {
+        mirror(this.root);
+    }
 }
