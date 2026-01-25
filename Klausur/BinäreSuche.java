@@ -2,21 +2,16 @@ public class BinäreSuche {
     // Die Methode für die Binäre Suche
     // Rückgabewert: Der Index des Elements oder -1.
     public static int suche(int[] daten, int gesuchterWert) {
-
         int links = 0;                  // Start des Suchbereichs
         int rechts = daten.length - 1;  // Ende des Suchbereichs
-
         // Solange der Bereich nicht "leer" ist (links darf rechts nicht überholen)
         while (links <= rechts) {
-
             // 1. Die Mitte berechnen
             int mitte = (links + rechts) / 2;
-
             // 2. Prüfen: Haben wir es gefunden?
             if (daten[mitte] == gesuchterWert) {
                 return mitte; // Volltreffer!
             }
-
             // 3. Wenn nicht: In welcher Hälfte müssen wir weitersuchen?
             if (gesuchterWert < daten[mitte]) {
                 // Der Wert ist kleiner als die Mitte -> Wir suchen links weiter.
@@ -28,7 +23,6 @@ public class BinäreSuche {
                 links = mitte + 1;
             }
         }
-
         // Wenn die Schleife durchläuft und sich 'links' und 'rechts' gekreuzt haben:
         return -1; // Nicht gefunden
     }

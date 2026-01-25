@@ -27,4 +27,27 @@ public class BinaryTree<T> {
         }
         return node.key;
     }
+
+    // 1. Die rekursive Methode (Das Herzstück der Tiefensuche)
+    public void traverse(TreeNode node) {
+        // Abbruch: Wenn wir über ein Blatt hinausgeschossen sind
+        if (node == null) {
+            return;
+        }
+
+        // AKTION: Wir "besuchen" den aktuellen Knoten (z.B. Drucken)
+        System.out.println("Besuche Knoten: " + node.key);
+
+        // ZUERST: Geh so tief wie möglich in den LINKEN Zweig
+        traverse(node.left);
+
+        // DANACH: Wenn links alles fertig ist, geh in den RECHTEN Zweig
+        traverse(node.right);
+    }
+
+    // 2. Die Starter-Methode
+    public void depthFirstTraversal() {
+        // Wir starten die Reise bei der Wurzel
+        traverse(this.root);
+    }
 }
