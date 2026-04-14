@@ -2,7 +2,7 @@ public class Fakultät {
     public static int fakultät(int n) {
         // 1. Die Abbruchbedingung (Base Case)
         // Wenn wir unten angekommen sind, geben wir 1 zurück.
-        if (n <= 1) {
+        if (n == 1) {
             return 1;
         }
 
