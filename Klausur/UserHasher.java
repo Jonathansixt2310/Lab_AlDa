@@ -63,6 +63,10 @@ public class UserHasher {
         System.out.println("\nBerechneter Mudolo: " + user.getHash() % 5);
         System.out.println("---------------------------------");
 
+        // Ausgabe für Bucket in Vorlesung
+        System.out.println("\nBerechneter Mudolo: " + user.getHash() % 6);
+        System.out.println("---------------------------------");
+
         scanner.close();
     }
 }
