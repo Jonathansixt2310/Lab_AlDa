@@ -44,6 +44,20 @@ public class DijkstraVisualizer {
         public String toString() {
             return node + "(" + (distance == Integer.MAX_VALUE ? "∞" : distance) + ")";
         }
+
+        // equals und hashCode überschrieben, damit wir Knoten in der Queue über ihren Namen finden/entfernen können
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            FrontierNode highway = (FrontierNode) o;
+            return node == highway.node;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(node);
+        }
     }
 
     public static void dijkstra(Map<Character, List<Edge>> graph, char startNode, char targetNode) {
@@ -96,7 +110,12 @@ public class DijkstraVisualizer {
                     if (newDistV < oldDistV) {
                         neighborState.distance = newDistV;
                         neighborState.predecessor = u;
-                        frontier.add(new FrontierNode(v, newDistV));
+
+                        // --- VERHINDERUNG VON DUPLIKATEN IN DER FRONTIER ---
+                        FrontierNode dummy = new FrontierNode(v, 0);
+                        frontier.remove(dummy); // Entfernt das Element mit dem gleichen Knotennamen, falls existent
+                        frontier.add(new FrontierNode(v, newDistV)); // Fügt es mit der neuen, kürzeren Distanz hinzu
+
                         System.out.println(" => KÜRZER! Update auf " + newDistV + ", Vorgänger: " + u);
                         neighborUpdated = true;
                     } else {
@@ -116,8 +135,6 @@ public class DijkstraVisualizer {
         }
 
         System.out.println("\n=== ALGORITHMUS BEENDET ===");
-
-        // Kürzesten Pfad ausgeben
         printShortestPath(states, startNode, targetNode);
     }
 
@@ -132,24 +149,18 @@ public class DijkstraVisualizer {
             return;
         }
 
-        // Rückwärts den Pfad über die Vorgänger einsammeln
         List<Character> path = new ArrayList<>();
         Character current = target;
         while (current != null) {
             path.add(current);
             current = states.get(current).predecessor;
         }
-
-        // Da wir von hinten nach vorne gelaufen sind, Liste umdrehen
         Collections.reverse(path);
 
-        // Pfad schön formatiert ausgeben
         System.out.print("Pfad: ");
         for (int i = 0; i < path.size(); i++) {
             System.out.print(path.get(i));
-            if (i < path.size() - 1) {
-                System.out.print(" -> ");
-            }
+            if (i < path.size() - 1) System.out.print(" -> ");
         }
         System.out.println();
         System.out.println("Gesamtdistanz (Kosten): " + targetState.distance);
@@ -169,10 +180,7 @@ public class DijkstraVisualizer {
 
     private static void printFrontier(PriorityQueue<FrontierNode> frontier) {
         System.out.print("Aktuelle Frontier (Warteschlange): [");
-        List<FrontierNode> list = new ArrayList<>();
-        for (FrontierNode fn : frontier) {
-            list.add(fn);
-        }
+        List<FrontierNode> list = new ArrayList<>(frontier);
         Collections.sort(list);
         for (int i = 0; i < list.size(); i++) {
             System.out.print(list.get(i));
@@ -190,7 +198,6 @@ public class DijkstraVisualizer {
         graph.put('5', Arrays.asList(new Edge('4', 2), new Edge('6', 4)));
         graph.put('6', new ArrayList<>());
 
-        // Dijkstra startet bei '1' und sucht den Weg zu Zielknoten '6'
         dijkstra(graph, '1', '6');
     }
 }
